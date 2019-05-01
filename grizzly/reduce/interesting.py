@@ -292,6 +292,8 @@ class Interesting(object):
             # have client error pages (code 4XX) call window.close() after a few seconds
             sapphire.Sapphire.CLOSE_CLIENT_ERROR = 2
             self.server = sapphire.Sapphire(timeout=serve_timeout)
+            # TODO: this gets leaked!
+            self.target.reverse(self.server.get_port(), self.server.get_port())
 
             if not self.no_harness:
                 harness = os.path.join(os.path.dirname(__file__), '..', 'common', 'harness.html')
